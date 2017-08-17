@@ -31,15 +31,6 @@ RUN mv hdpm-0.7.1 hdpm
 # discover and install sim-recon dependencies
 RUN /hdpm/bin/hdpm show -p | sh
 
-# create mount point for sim-recon, simlinks in /usr/local
-ADD cilogon-osg.pem /
-RUN wget --ca-certificate=cilogon-osg.pem https://zeus.phys.uconn.edu/halld/gridwork/local.tar.gz
-RUN mv /usr/sbin/sshd /usr/sbin/sshd_orig
-RUN tar xf local.tar.gz -C /
-RUN rm cilogon-osg.pem
-RUN rm local.tar.gz
-RUN rm -rf /hdpm
-
 # make the cvmfs filesystem visible inside the container
 VOLUME /cvmfs/oasis.opensciencegrid.org
 
